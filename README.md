@@ -1,1 +1,4 @@
 # multiple-comparsion-method
+My outlier-dependent comparison method is a post-hoc comparison method which identifies significant differences between group means. It combines Tukey's Honestly Significant Difference (HSD) with a modified Bonferroni correction to maximize statistical power while in a more flexible way than either Tukey's HSD or Bonferroni.
+The sample means of each group are used to calculate summary statistics (median and interquartile range). Then each sample mean is categorized as an extreme outlier if it falls more than 3 times the IQR from the median, an outlier if it falls between 1.5 and 3 times the IQR from the median, or a non-outlier if it is within 1.5 times the IQR from the median.
+The extreme outliers are compared using a t-test with Bonferroni correction of $\frac{\alpha}{n}$. The outliers are compared using a t-test with modified Bonferroni correction of $\frac{\alpha}{\sqrt{n}}$. The non-outliers are compared using Tukey's HSD.\\
