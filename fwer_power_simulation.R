@@ -116,21 +116,6 @@ tukey <- function(means, J, MSE, alpha = 0.05) {
   return(ID) #return the result
 }
 
-
-#Simulate Power
-#set I and J
-I <- 5
-J <- 10
-#create a vector of deltas to test
-deltas <- c(.5,1,1.5,2)
-power <- c() #create a vector to store the results
-for (d in deltas){ #simulate the power for each delta
-  result <- simulate_power(I,J,d)
-  power <- c(power, result)
-}
-#Store the results in a data frame
-power_results <- data.frame(delta,power)
-
 #Simulate FWER
 J <- c(3,5,7,5,5)
 I <- c(10,10,10,5,20)
@@ -142,3 +127,18 @@ for (k in 1:length(I)){ #Simulate FWER for each I,J combination
 }
 #Store the results in a data frame
 fwer_results <- data.frame(I,J,fwer)
+
+#Simulate Power
+I <- 5
+J <- 10
+#create a vector of deltas to test
+deltas <- c(.5,1,1.5,2)
+power_ocd <- c() #create vectors to store the results
+power_tuk <- c()
+for (d in deltas){ #simulate the power for each delta
+  result <- simulate_power(I,J,d)
+  power_ocd <- c(power, result[1])
+  power_tuk <- c(power, result[2])
+}
+#Put the results in a data frame
+power_results <- data.frame(delta,power_ocd,power_tuk)
